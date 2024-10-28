@@ -41,7 +41,8 @@ exports.createRes = async(req,res)=>{
 
     if (Resc) return res.send({
         "status" : true,
-        "data" : "New reservation"
+        "data" : "New reservation",
+        "id_reservation" : reS.driver
     })
 
     return res.send({
@@ -54,7 +55,7 @@ exports.createRes = async(req,res)=>{
 exports.getRes = async (req,res)=>{
     let Res;
     Res = await User.find({
-        _id: req.id
+        user: req.id
     })
 
     res.send({
@@ -66,7 +67,7 @@ exports.getRes = async (req,res)=>{
 exports.getOneRes = async (req,res)=>{
     const {driver} = req.body;
     const r = await User.findOne({
-        _id: req.id,
+        user: req.id,
         driver : driver 
     })
 
@@ -84,9 +85,11 @@ exports.getOneRes = async (req,res)=>{
 
 exports.updateRes = async (req,res)=>{
     try {
+        const {driver} = req.body;
         const updates = req.body
         const r = await User.findOne({
-            _id: req.id
+            user: req.id,
+            driver : driver
         })
     
         if (!r) {
