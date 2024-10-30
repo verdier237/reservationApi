@@ -19,7 +19,7 @@ exports.isAlreadyExists = async (email) => {
 }
 
 exports.createRes = async(req,res)=>{
-    const {positionDriver,positionClient,price} = req.body;
+    const {positionDriver,positionClient,price,driver,type} = req.body;
 
     if (this.isEmpty(positionDriver) || this.isEmpty(positionClient) || this.isEmpty(price)) {
         return res.status(400).send(`Missing informations`)
@@ -30,11 +30,12 @@ exports.createRes = async(req,res)=>{
 
     const reS = {
         user: req.id,
-          driver : "QWFFSEFVSVDVVWEFWF",
+          driver : driver,
           date: new Date(),
           positionDriver: positionDriver,
           positionClient: positionClient,
-          price:price, 
+          price:price,
+          type : type
     }
 
     const Resc = await User.create(reS)

@@ -37,7 +37,11 @@ const ReservationSchema = new mongoose.Schema(
     },
     price: {
       type: Number,
-      required: true,
+      required: true
+    },
+    type: {
+      type : String,
+      required: true
     },
     status: {
       type: String,
